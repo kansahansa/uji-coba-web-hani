@@ -7,6 +7,7 @@ const lettersArray = letters.split("");
 const fontSize = 20;
 const columns = Math.floor(canvas.width / fontSize);
 const drops = Array(columns).fill(0);
+
 function draw(){
   ctx.fillStyle = "rgba(0,0,0,0.05)";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -14,14 +15,15 @@ function draw(){
   ctx.font = fontSize + "px monospace";
   for(let i=0; i<drops.length; i++){
     const text = lettersArray[Math.floor(Math.random()*lettersArray.length)];
-ctx.fillText(text, i*fontSize, drops[i]*fontSize);
+    ctx.fillText(text, i*fontSize, drops[i]*fontSize);
     if(drops[i]*fontSize > canvas.height || Math.random()>0.975){
       drops[i] = 0;
     }
     drops[i]++;
   }
-}requestAnimationFrame(draw);
+  requestAnimationFrame(draw);
 }
+
 draw();
 window.addEventListener("resize", ()=>{
   canvas.width = window.innerWidth;
